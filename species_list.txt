@@ -2,3 +2,7 @@ Homo sapiens
 Arabidopsis thaliana
 Escherichia coli
 Mus musculus
+9606
+3702
+562
+10090

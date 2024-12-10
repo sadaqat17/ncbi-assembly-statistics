@@ -95,4 +95,4 @@ Contributions and suggestions are welcome! Please open an issue or submit a pull
 ## Contact
 
 If you have any questions or feedback, feel free to contact me at:  
-**Email:** muhammad.sadaqat@unir-rennes.fr
+**Email:** muhammad.sadaqat@univ-rennes.fr

@@ -4,6 +4,18 @@ import csv
 # Set your email for NCBI
 Entrez.email = "your_email@example.com"
 
+def get_taxid_from_species(species):
+    """
+    Convert species name to TaxID.
+    """
+    handle = Entrez.esearch(db="taxonomy", term=species, retmax=1)
+    record = Entrez.read(handle)
+    handle.close()
+    if record["IdList"]:
+        return record["IdList"][0]  # Return the first match
+    else:
+        return None  # No TaxID found
+
 def fetch_assemblies_for_taxid(taxid):
     """
     Fetch all genome assembly UIDs for a given TaxID.
@@ -28,12 +40,12 @@ def safe_extract(docsum, key, default="Not Available"):
     """
     return docsum.get(key, default)
 
-# Taxonomic ID to query
-taxid = "9606"  # Example: Homo sapiens
+# Read species from the species_list.txt file
+with open("species_list.txt", "r") as file:
+    species_list = file.readlines()
 
-# Fetch all assembly UIDs for the given TaxID
-assembly_uids = fetch_assemblies_for_taxid(taxid)
-print(f"Found {len(assembly_uids)} assemblies for TaxID {taxid}")
+# Clean up the species names (remove newlines and extra spaces)
+species_list = [species.strip() for species in species_list]
 
 # Prepare output file
 output_file = "assemblies_statistics.csv"
@@ -51,39 +63,55 @@ with open(output_file, "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(fields)  # Write header
 
-    for uid in assembly_uids:
-        details = fetch_assembly_details(uid)
-        docsum = details['DocumentSummarySet']['DocumentSummary'][0]
+    # Loop through the species list
+    for species in species_list:
+        print(f"Processing: {species}")
 
-        row = [
-            safe_extract(docsum, "AssemblyAccession"),
-            safe_extract(docsum, "Organism"),
-            safe_extract(docsum, "Taxid"),
-            safe_extract(docsum, "Submitter"),
-            safe_extract(docsum, "AssemblyStatus"),
-            safe_extract(docsum, "FtpPath_GenBank"),
-            safe_extract(docsum, "FtpPath_RefSeq"),
-            safe_extract(docsum, "ContigN50"),
-            safe_extract(docsum, "ScaffoldN50"),
-            safe_extract(docsum, "Chromosome", "Not Available"),
-            safe_extract(docsum, "TotalChromosomes", "Not Available"),
-            safe_extract(docsum, "Ploidy", "Not Available"),
-            safe_extract(docsum, "GenomeSize", "Not Available"),
-            safe_extract(docsum, "GenomeType", "Not Available"),
-            safe_extract(docsum, "ChromosomeCount", "Not Available"),
-            safe_extract(docsum, "ScaffoldCount", "Not Available"),
-            safe_extract(docsum, "ContigCount", "Not Available"),
-            safe_extract(docsum, "Ensembl", "Not Available"),
-            safe_extract(docsum, "Phytozome", "Not Available"),
-            safe_extract(docsum, "AssemblyVersion", "Not Available"),
-            safe_extract(docsum, "SequencingTechnology", "Not Available"),
-            safe_extract(docsum, "AssemblyMethod", "Not Available"),
-            safe_extract(docsum, "FirstReportedPaper", "Not Available"),
-            safe_extract(docsum, "Year", "Not Available"),
-            safe_extract(docsum, "DOI", "Not Available"),
-        ]
+        # Check if the input is a TaxID or species name
+        if species.isdigit():  # If it's a TaxID (a number)
+            taxid = species
+        else:  # If it's a species name
+            taxid = get_taxid_from_species(species)
+            if taxid is None:
+                print(f"TaxID not found for {species}. Skipping.")
+                continue
 
-        print(f"Processed: {row[0]} ({row[1]})")
-        writer.writerow(row)
+        print(f"Fetching data for TaxID: {taxid}")
+        assembly_uids = fetch_assemblies_for_taxid(taxid)
+
+        for uid in assembly_uids:
+            details = fetch_assembly_details(uid)
+            docsum = details['DocumentSummarySet']['DocumentSummary'][0]
+
+            row = [
+                safe_extract(docsum, "AssemblyAccession"),
+                safe_extract(docsum, "Organism"),
+                taxid,
+                safe_extract(docsum, "Submitter"),
+                safe_extract(docsum, "AssemblyStatus"),
+                safe_extract(docsum, "FtpPath_GenBank"),
+                safe_extract(docsum, "FtpPath_RefSeq"),
+                safe_extract(docsum, "ContigN50"),
+                safe_extract(docsum, "ScaffoldN50"),
+                safe_extract(docsum, "Chromosome", "Not Available"),
+                safe_extract(docsum, "TotalChromosomes", "Not Available"),
+                safe_extract(docsum, "Ploidy", "Not Available"),
+                safe_extract(docsum, "GenomeSize", "Not Available"),
+                safe_extract(docsum, "GenomeType", "Not Available"),
+                safe_extract(docsum, "ChromosomeCount", "Not Available"),
+                safe_extract(docsum, "ScaffoldCount", "Not Available"),
+                safe_extract(docsum, "ContigCount", "Not Available"),
+                safe_extract(docsum, "Ensembl", "Not Available"),
+                safe_extract(docsum, "Phytozome", "Not Available"),
+                safe_extract(docsum, "AssemblyVersion", "Not Available"),
+                safe_extract(docsum, "SequencingTechnology", "Not Available"),
+                safe_extract(docsum, "AssemblyMethod", "Not Available"),
+                safe_extract(docsum, "FirstReportedPaper", "Not Available"),
+                safe_extract(docsum, "Year", "Not Available"),
+                safe_extract(docsum, "DOI", "Not Available"),
+            ]
+
+            print(f"Processed: {row[0]} ({row[1]})")
+            writer.writerow(row)
 
 print(f"Assembly statistics saved to {output_file}")

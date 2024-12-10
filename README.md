@@ -39,10 +39,10 @@ This repository contains a Python script to fetch genome assembly statistics for
 Open `species_list.txt` and add the species names or TaxIDs you want to analyze. Each species should be on a new line. The script supports both species names and TaxIDs. Example `species_list.txt`:
 
 ```
-Homo sapiens
-3702
 Arabidopsis thaliana
 9606
+Homo sapiens
+3702
 ```
 
 ### Run the Script

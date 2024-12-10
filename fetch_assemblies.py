@@ -50,12 +50,8 @@ species_list = [species.strip() for species in species_list]
 # Prepare output file
 output_file = "assemblies_statistics.csv"
 fields = [
-    "Assembly Accession", "Organism Name", "TaxID", "Submitter", "Assembly Level",
-    "GenBank FTP Link", "RefSeq FTP Link", "Contig N50", "Scaffold N50",
-    "Base Chromosome No.", "Total Chromosomes", "Ploidy Level", "Genome Size",
-    "Genome Type", "Chromosome Count", "Scaffold Count", "Contig Count",
-    "Ensembl", "Phytozome", "Assembly Version", "Sequencing Technology",
-    "Assembly Method", "First Reported Paper", "Year", "DOI/URL"
+    "Assembly Accession", "Organism Name", "TaxID", "Assembly Level",
+    "GenBank FTP Link", "RefSeq FTP Link", "Contig N50", "Scaffold N50"
 ]
 
 # Write statistics to a CSV file
@@ -87,28 +83,11 @@ with open(output_file, "w", newline="") as csvfile:
                 safe_extract(docsum, "AssemblyAccession"),
                 safe_extract(docsum, "Organism"),
                 taxid,
-                safe_extract(docsum, "Submitter"),
                 safe_extract(docsum, "AssemblyStatus"),
                 safe_extract(docsum, "FtpPath_GenBank"),
                 safe_extract(docsum, "FtpPath_RefSeq"),
                 safe_extract(docsum, "ContigN50"),
-                safe_extract(docsum, "ScaffoldN50"),
-                safe_extract(docsum, "Chromosome", "Not Available"),
-                safe_extract(docsum, "TotalChromosomes", "Not Available"),
-                safe_extract(docsum, "Ploidy", "Not Available"),
-                safe_extract(docsum, "GenomeSize", "Not Available"),
-                safe_extract(docsum, "GenomeType", "Not Available"),
-                safe_extract(docsum, "ChromosomeCount", "Not Available"),
-                safe_extract(docsum, "ScaffoldCount", "Not Available"),
-                safe_extract(docsum, "ContigCount", "Not Available"),
-                safe_extract(docsum, "Ensembl", "Not Available"),
-                safe_extract(docsum, "Phytozome", "Not Available"),
-                safe_extract(docsum, "AssemblyVersion", "Not Available"),
-                safe_extract(docsum, "SequencingTechnology", "Not Available"),
-                safe_extract(docsum, "AssemblyMethod", "Not Available"),
-                safe_extract(docsum, "FirstReportedPaper", "Not Available"),
-                safe_extract(docsum, "Year", "Not Available"),
-                safe_extract(docsum, "DOI", "Not Available"),
+                safe_extract(docsum, "ScaffoldN50")
             ]
 
             print(f"Processed: {row[0]} ({row[1]})")

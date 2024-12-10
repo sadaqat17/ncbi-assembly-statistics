@@ -62,26 +62,18 @@ The script will generate a CSV file with detailed assembly statistics, including
 - Assembly Accession
 - Organism Name
 - TaxID
-- Submitter
 - Assembly Level
 - GenBank FTP Link
 - RefSeq FTP Link
 - Contig N50
 - Scaffold N50
-- Genome Size
-- Chromosome Count
-- Scaffold Count
-- Contig Count
-- Sequencing Technology
-- Assembly Method
-- DOI/URL
 
 ### Sample Output
 
 A sample output row in `assemblies_statistics.csv` will look like this:
 
 ```
-AssemblyAccession, OrganismName, TaxID, Submitter, AssemblyLevel, GenBankFTPLink, RefSeqFTPLink, ContigN50, ScaffoldN50, GenomeSize, ChromosomeCount, ScaffoldCount, ContigCount, SequencingTechnology, AssemblyMethod, DOI/URL
+AssemblyAccession, OrganismName, TaxID, AssemblyLevel, GenBankFTPLink, RefSeqFTPLink, ContigN50, ScaffoldN50
 ```
 
 ## License

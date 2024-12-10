@@ -4,7 +4,7 @@ This repository contains a Python script to fetch genome assembly statistics for
 
 ## Features
 - Fetch statistics for all genome assemblies associated with a given TaxID or species name.
-- Includes detailed statistics like genome size, assembly level, N50 values, sequencing technology, and more.
+- Includes detailed statistics such as genome size, assembly level, N50 values, sequencing technology, and more.
 - Outputs the results to a CSV file.
 
 ## Prerequisites
@@ -13,38 +13,43 @@ This repository contains a Python script to fetch genome assembly statistics for
 - An internet connection to access NCBI's databases
 
 ## Installation
-1. Clone this repository:
+
+1. **Clone this repository:**
+
    ```bash
    git clone https://github.com/sadaqat17/ncbi-assembly-statistics.git
    cd ncbi-assembly-statistics
-   
-2. Install the required Python library:
-```bash
+Install the required Python library:
+
+bash
+Copy code
 pip install biopython
+Ensure that the fetch_assemblies.py script and the species_list.txt file are in the repository folder.
 
-Make sure you have the fetch_assemblies.py script and the species_list.txt file in the repository folder.
+Usage
+Prepare the species list:
 
-**## Usage**
-1. Prepare the species list:
 Open species_list.txt and add the species names or TaxIDs you want to analyze. Each species should be on a new line.
 The script supports both species names and TaxIDs.
 Example species_list.txt:
-```yaml
+
+yaml
 Copy code
 Homo sapiens
 3702
 Arabidopsis thaliana
 9606
+Run the script:
 
-2. Run the script:
 Open a terminal, navigate to the repository folder, and run:
-```bash
+bash
+Copy code
 python fetch_assemblies.py
-
 The script will fetch genome assembly statistics for each species and save the results in a CSV file named assemblies_statistics.csv.
 
-3. Output
+Output
 The script will generate a CSV file with detailed assembly statistics, including:
+
 Assembly Accession
 Organism Name
 TaxID
@@ -61,10 +66,16 @@ Contig Count
 Sequencing Technology
 Assembly Method
 DOI/URL
+Sample output row in assemblies_statistics.csv:
 
-**License**
+mathematica
+Copy code
+AssemblyAccession, OrganismName, TaxID, Submitter, AssemblyLevel, GenBankFTPLink, RefSeqFTPLink, ContigN50, ScaffoldN50, GenomeSize, ChromosomeCount, ScaffoldCount, ContigCount, SequencingTechnology, AssemblyMethod, DOI/URL
+License
 This project is licensed under the MIT License.
 
-**Contributions**
+Contributions
 Contributions and suggestions are welcome! Please open an issue or submit a pull request.
 
+Contact
+If you have any questions or feedback, feel free to contact me at: muhammad.sadaqat@unir-rennes.fr

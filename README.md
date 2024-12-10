@@ -18,37 +18,33 @@ This repository contains a Python script to fetch genome assembly statistics for
    git clone https://github.com/sadaqat17/ncbi-assembly-statistics.git
    cd ncbi-assembly-statistics
    
-Install the required Python library:
-
-bash
-Copy code
+2. Install the required Python library:
+```bash
 pip install biopython
+
 Make sure you have the fetch_assemblies.py script and the species_list.txt file in the repository folder.
 
-Usage
-Prepare the species list:
-
+**## Usage**
+1. Prepare the species list:
 Open species_list.txt and add the species names or TaxIDs you want to analyze. Each species should be on a new line.
 The script supports both species names and TaxIDs.
 Example species_list.txt:
-
-yaml
+```yaml
 Copy code
 Homo sapiens
 3702
 Arabidopsis thaliana
 9606
-Run the script:
 
+2. Run the script:
 Open a terminal, navigate to the repository folder, and run:
-bash
-Copy code
+```bash
 python fetch_assemblies.py
+
 The script will fetch genome assembly statistics for each species and save the results in a CSV file named assemblies_statistics.csv.
 
-Output
+3. Output
 The script will generate a CSV file with detailed assembly statistics, including:
-
 Assembly Accession
 Organism Name
 TaxID
@@ -65,16 +61,10 @@ Contig Count
 Sequencing Technology
 Assembly Method
 DOI/URL
-Sample output row in assemblies_statistics.csv:
 
-mathematica
-Copy code
-AssemblyAccession, OrganismName, TaxID, Submitter, AssemblyLevel, GenBankFTPLink, RefSeqFTPLink, ContigN50, ScaffoldN50, GenomeSize, ChromosomeCount, ScaffoldCount, ContigCount, SequencingTechnology, AssemblyMethod, DOI/URL
-License
+**License**
 This project is licensed under the MIT License.
 
-Contributions
+**Contributions**
 Contributions and suggestions are welcome! Please open an issue or submit a pull request.
 
-Contact
-If you have any questions or feedback, feel free to contact me at: sadaqat17@example.com

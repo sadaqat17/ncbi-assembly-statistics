@@ -76,15 +76,3 @@ A sample output row in `assemblies_statistics.csv` will look like this:
 AssemblyAccession, OrganismName, TaxID, AssemblyLevel, GenBankFTPLink, RefSeqFTPLink, ContigN50, ScaffoldN50
 ```
 
-## License
-
-This project is licensed under the MIT License.
-
-## Contributions
-
-Contributions and suggestions are welcome! Please open an issue or submit a pull request.
-
-## Contact
-
-If you have any questions or feedback, feel free to contact me at:  
-**Email:** muhammad.sadaqat@univ-rennes.fr
